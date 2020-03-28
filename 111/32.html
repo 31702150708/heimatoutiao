@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+    .dt {
+      width: 200px;
+      height: 500px;
+      padding-top: 50px;
+      margin: 0 auto;
+    }
+
+    .info {
+      float: left;
+      width: 200px;
+      height: 30px;
+      background-color: whitesmoke;
+      border: 1px solid black;
+      border-radius: 15px;
+      margin-bottom: 10px;
+    }
+
+    .pause {
+      float: left;
+      width: 80px;
+      height: 30px;
+      background-color: whitesmoke;
+      border: 1px solid black;
+      border-radius: 6px;
+    }
+
+    .continue {
+      float: right;
+      width: 80px;
+      height: 30px;
+      background-color: whitesmoke;
+      border: 1px solid black;
+      border-radius: 6px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="dt">
+    <button class="info">
+      <btton> <br>
+        <button class="pause">暂停<btton>
+            <button class="continue">继续<btton>
+  </div>
+  <script>
+    let info = document.querySelector('.info');
+    let pause = document.querySelector('.pause');
+    let con = document.querySelector('.continue');
+
+    let total = 600
+    info.innerHTML = timeFormar(total)
+    let timeId = setInterval(() => {
+      total--
+      info.innerHTML = timeFormar(total)
+      if (total == 0) {
+        clearInterval(timeId)
+        return
+      }
+    }, 1000);
+
+    pause.onclick = function () {
+      clearInterval(timeId)
+    }
+    con.onclick = function () {
+      timeId = setInterval(() => {
+        total--
+        info.innerHTML = timeFormar(total)
+        if (total == 0) {
+          clearInterval(timeId)
+          return
+        }
+      }, 1000);
+    }
+
+
+    function timeFormar(time) {
+      let minute = Math.floor(time / 60)
+      minute = minute < 10 ? "0" + minute : minute
+      let second = time % 60
+      second = second < 10 ? "0" + second : second
+
+      return `${minute}:${second}`
+    }
+  </script>
+</body>
+
+<html>
