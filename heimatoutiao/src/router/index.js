@@ -21,12 +21,52 @@ const routes = [
   {
     // 个人中心页
     path: "/personal",
-    component: () => import("@/views/Personal")
+    component: () => import("@/views/Personal"),
+    // 路由可以通过meta自定义数据
+    meta: {
+      // 代表这个页面需要授权
+      authorization: true
+    }
   },
   {
     // 编辑页
     path: "/editProfile",
-    component: () => import("@/views/EditProfile")
+    component: () => import("@/views/EditProfile"),
+    // 路由可以通过meta自定义数据
+    meta: {
+      // 代表这个页面需要授权
+      authorization: true
+    }
+  },
+  {
+    // 跟帖页
+    path: "/comment",
+    component: () => import("@/views/Comment"),
+    // 路由可以通过meta自定义数据
+    meta: {
+      // 代表这个页面需要授权
+      authorization: true
+    }
+  },
+  {
+    // 关注页
+    path: "/follow",
+    component: () => import("@/views/Follow"),
+    // 路由可以通过meta自定义数据
+    meta: {
+      // 代表这个页面需要授权
+      authorization: true
+    }
+  },
+  {
+    // 收藏页
+    path: "/star",
+    component: () => import("@/views/Star"),
+    // 路由可以通过meta自定义数据
+    meta: {
+      // 代表这个页面需要授权
+      authorization: true
+    }
   }
 ]
 

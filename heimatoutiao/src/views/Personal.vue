@@ -3,10 +3,10 @@
     <!-- 顶部的导航条 -->
     <div class="navigate-bar">
       <!-- $router.back()是实例下的属性，可以直接在模板中渲染 -->
-      <span class="iconfont iconjiantou2" @click="$router.back()"></span>
+      <span class="iconfont iconjiantou2" @click="$router.back()">←</span>
       <strong>个人中心</strong>
       <!-- $router.push()是实例下的属性，可以直接在模板中渲染 -->
-      <span class="iconfont iconshouye" @click="$router.push('/')"></span>
+      <span class="iconfont iconshouye" @click="$router.push('/')">△</span>
     </div>
 
     <!-- 头部 -->
@@ -14,7 +14,7 @@
       <!-- 头像 -->
       <div class="avatar">
         <!-- $axios.defaults.baseURL 就是后台的基准路径 -->
-        <img :src="$axios.defaults.baseURL + userInfo.head_img" />
+        <img :src="$axios.defaults.baseURL + userInfo.head_img" v-if="userInfo.head_img" />
       </div>
       <!-- 姓名 -->
       <div class="profile">
@@ -34,7 +34,13 @@
     <!-- 组件的调用，单双标签都可以 -->
     <!-- :key不是报错，可以不加，
     但是vue希望给循环的元素指定“唯一的key”，所以推荐我们在循环时候都加上-->
-    <Listbar v-for="(item, index) in rows" :key="index" :label="item.label" :tips="item.tips" />
+    <Listbar
+      v-for="(item, index) in rows"
+      :key="index"
+      :label="item.label"
+      :tips="item.tips"
+      :path="item.path"
+    />
 
     <!-- handleClick点击退出按钮时候触发 -->
     <!-- click.native这个事件类型，会给Listbar这个组件最外部的div强制绑定点击事件
@@ -47,6 +53,8 @@
 // 导入列表按钮栏的组件，import后面接上的组件变量名（变量就意味着可以随便改名字）
 // @代表src目录
 import Listbar from "@/components/Listbar";
+// 引入头部导航组件
+import NavigateBar from "@/components/NavigateBar";
 // 引入第三方的日期格式处理的工具库
 import moment from "moment";
 export default {
@@ -54,9 +62,9 @@ export default {
     return {
       // 组织一个列表按钮栏的数据
       rows: [
-        { label: "我的关注", tips: "关注的用户" },
-        { label: "我的跟帖", tips: "跟帖回复" },
-        { label: "我的收藏", tips: "文章视频" }
+        { label: "我的关注", tips: "关注的用户", path: "/follow" },
+        { label: "我的跟帖", tips: "跟帖回复", path: "/comment" },
+        { label: "我的收藏", tips: "文章视频", path: "/star" }
       ],
       // 个人的详细信息,初始值给一个对象
       userInfo: {},
@@ -66,7 +74,8 @@ export default {
   },
   // 注册组件,导入的子组件都必须注册才可以再模板渲染
   components: {
-    Listbar
+    Listbar,
+    NavigateBar
   },
   // 组件加载完毕后触发，类似window.onload
   mounted() {
