@@ -1,17 +1,24 @@
 <template>
-  <div class="imgList">
-    <h4>吸烟有害身体健康</h4>
-    <div class="images">
-      <img src="https://www.baidu.com/img/bd_logo1.png" />
-      <img src="https://www.baidu.com/img/bd_logo1.png" />
-      <img src="https://www.baidu.com/img/bd_logo1.png" />
+  <router-link :to="`/post/${data.id}`">
+    <div class="imgList">
+      <h4>{{data.title}}</h4>
+      <div class="images">
+        <img
+          v-for="(item, index) in data.cover"
+          :key="index"
+          :src="$axios.defaults.baseURL + item.url"
+        />
+      </div>
+      <p>{{data.user.nickname}} {{data.comment_length}}跟帖</p>
     </div>
-    <p>奈何 52跟帖</p>
-  </div>
+  </router-link>
 </template>
 
 <script>
-export default {};
+export default {
+  // 传入的文章数据
+  props: ["data"]
+};
 </script>
 
 <style scoped lang="less">
@@ -42,3 +49,4 @@ export default {};
   }
 }
 </style>
+© 2020 GitHub, Inc.

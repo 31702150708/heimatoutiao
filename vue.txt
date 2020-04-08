@@ -1,3 +1,4 @@
+cd desktop
 cd heimatoutiao
 npm run serve
 
@@ -5,3 +6,8 @@ npm run serve
 
 cd Typescript-Node-Koa2
 npm run start
+
+
+git add -A
+git commit -m ""
+git push origin master

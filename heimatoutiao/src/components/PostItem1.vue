@@ -1,29 +1,33 @@
 <template>
-  <div>
-    <!-- 循环结构，少于三张图的布局 -->
+  <router-link :to="`/post/${data.id}`">
+    <!-- 循环的结构,少于3张图片的布局 -->
     <div class="imgText">
       <div class="imgText-left">
-        <h4>吸烟有害身体健康</h4>
-        <p>奈何 30跟帖</p>
+        <h4>{{data.title}}</h4>
+        <p>{{data.user.nickname}} {{data.comment_length}}跟帖</p>
       </div>
-      <img src="https://www.baidu.com/img/bd_logo1.png" />
+      <img :src="$axios.defaults.baseURL + data.cover[0].url" />
     </div>
-  </div>
+  </router-link>
 </template>
 
 <script>
-export default {};
+export default {
+  // 传入的文章数据
+  props: ["data"]
+};
 </script>
 
-<style lang="less" scoped>
+<style scoped lang="less">
 .imgText {
   padding: 20/360 * 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px #eeeeee solid;
+  border-bottom: 1px #eee solid;
   .imgText-left {
     h4 {
+      // 文字超出两行出现省略号
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 2;
@@ -41,8 +45,7 @@ export default {};
     display: block;
     object-fit: cover;
     margin-left: 10/360 * 100vw;
-    // 防止图片在flex布局下被挤压
-    flex-shrink: 0;
+    flex-shrink: 0; // 防止图片在flex布局下被挤压
   }
 }
 </style>

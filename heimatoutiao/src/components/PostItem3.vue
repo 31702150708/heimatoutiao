@@ -1,22 +1,25 @@
 <template>
-  <div class="video">
-    <h4>吸烟有害身体健康</h4>
-    <div class="cover">
-      <!-- 封面图片 -->
-      <img
-        src="https://img20.360buyimg.com/da/s590x470_jfs/t1/6412/18/141/70492/5bacdaf3E48cea54f/414c8264705bd268.jpg.webp"
-      />
-      <!-- 图片上的按钮 -->
-      <div class="cover-layer">
-        <span class="iconfont iconshipin"></span>
+  <router-link :to="`/video/${data.id}`">
+    <div class="video">
+      <h4>{{data.title}}</h4>
+      <div class="cover">
+        <!-- 封面图片 -->
+        <img :src="$axios.defaults.baseURL + data.cover[0].url" />
+        <!-- 图片上的按钮 -->
+        <div class="cover-layer">
+          <span class="iconfont iconshipin"></span>
+        </div>
       </div>
+      <p>{{data.user.nickname}} {{data.comment_length}}跟帖</p>
     </div>
-    <p>奈何 66跟帖</p>
-  </div>
+  </router-link>
 </template>
 
 <script>
-export default {};
+export default {
+  // 传入的文章数据
+  props: ["data"]
+};
 </script>
 
 <style scoped lang="less">

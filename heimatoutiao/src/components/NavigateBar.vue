@@ -2,7 +2,7 @@
   <!-- 顶部的导航条 -->
   <div class="navigate-bar">
     <!-- $router.back()是实例下的属性,可以直接在模板中渲染 -->
-    <span class="iconfont iconjiantou2" @click="$router.back()">←</span>
+    <span class="iconfont iconjiantou2" @click="$router.back()"></span>
     <strong>{{title}}</strong>
 
     <!-- $router.push()是实例下的属性,可以直接在模板中渲染 -->
